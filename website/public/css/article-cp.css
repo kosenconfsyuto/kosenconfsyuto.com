@@ -11,6 +11,10 @@
     margin: 0;
 }
 
+#article-cp ul {
+    padding-inline-start: 20px;
+}
+
 #article-cp img {
     border-radius: 0.5em;
 }
