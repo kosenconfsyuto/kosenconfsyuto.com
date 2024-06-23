@@ -21,3 +21,4 @@ Cargo.lock
 
 access.log
 access_count.txt
+.DS_Store
