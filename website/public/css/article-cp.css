@@ -35,3 +35,13 @@
 #article-tags>div>img {
     filter: brightness(0);
 }
+
+header {
+    color: #000;
+}
+
+#header-title span,
+#header-title h1,
+header>div>nav>ul>li>a {
+    color: #000;
+}
