@@ -2,10 +2,36 @@
 title: トップページ
 description: 高専カンファレンスin首都HP
 tags: トップ
-image: /images/poster.png
+image: /images/site-ogp.png
 common_parts: page
 ---
 <link rel="stylesheet" href="/css/top.css">
+<style>
+    /* Custom styles for the slider */
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+</style>
 <div id="top-par">
     <div id="top-main-contents">
         <section id="top-flex" class="flex default-width">
@@ -35,32 +61,99 @@ common_parts: page
             </ul>
         </section>
         <section id="slider">
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slides">
-                        <div class="slide"><img src="/images/poster.png" class="w-full" /></div>
-                        <div class="slide"><img src="/images/member.png" class="w-full" /></div>
-                        <div class="slide"><img src="/images/narisumashi.png" class="w-full" /></div>
-                        <div class="slide"><img src="/images/narisumashi.png" class="w-full" /></div>
-                        <div class="slide"><img src="/images/poster.png" class="w-full" /></div>
-                        <div class="slide"><img src="/images/member.png" class="w-full" /></div>
+            <div style="overflow: hidden;">
+                <!-- Swiper -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="/images/poster.png" class="w-full"></div>
+                        <div class="swiper-slide"><img src="/images/member.png" class="w-full"></div>
+                        <div class="swiper-slide"><img src="/images/narisumashi.png" class="w-full"></div>
+                        <div class="swiper-slide"><img src="/images/poster.png" class="w-full"></div>
+                        <div class="swiper-slide"><img src="/images/member.png" class="w-full"></div>
+                        <div class="swiper-slide"><img src="/images/narisumashi.png" class="w-full"></div>
+                    </div>
+                    <div class="controls default-width"
+                        style="position: unset; display: flex; justify-content: space-between; padding-top: 2em;">
+                        <!-- Add pause/start -->
+                        <div class="swiper-pause-par">
+                            <button class="control swiper_pause">
+                                <img src="/icons/pause_24dp_FILL1_wght200_GRAD0_opsz24.svg">
+                            </button>
+                            <button class="control swiper_start none">
+                                <img src="/icons/play_arrow_24dp_FILL0_wght200_GRAD0_opsz24.svg">
+                            </button>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"
+                            style="position: relative; top: 0; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center;">
+                        </div>
+                        <!-- Add Navigation -->
+                        <div style="display: flex; gap: 1em; justify-content: flex-end;">
+                            <div class="swiper-button-prev control" style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
+                                <img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" style="transform: rotate(180deg);" loading="lazy">
+                            </div>
+                            <div class="swiper-button-next control" style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
+                                <img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" loading="lazy">
+                            </div>
+                            <style>
+                                .swiper-button-prev::after {
+                                    content: "";
+                                }
+
+                                .swiper-button-next::after {
+                                    content: "";
+                                }
+                            </style>
+                        </div>
+
                     </div>
                 </div>
-                <div class="controls default-width">
-                    <div id="pause-par">
-                        <button class="control play-pause"><img
-                                src="/icons/pause_24dp_FILL1_wght200_GRAD0_opsz24.svg" loading="lazy" /></button>
-                    </div>
-                    <div class="navigation"></div>
-                    <div class="flex gap-1em">
-                        <button class="control prev"><img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg"
-                                style="transform: rotate(180deg);" loading="lazy" /></button>
-                        <button class="control next"><img
-                                src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" loading="lazy" /></button>
-                    </div>
-                </div>
+
+                <!-- Swiper JS -->
+                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+                <!-- Initialize Swiper -->
+                <script>
+                    var swiper = new Swiper('.swiper-container', {
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        loop: true,
+                        autoHeight: false,
+                        spaceBetween: 32,
+
+                        slidesPerView: 1,
+                        centeredSlides: true,
+                        grabCursor: true,
+                        slideToClickedSlide: true,
+                        autoplay: {
+                            delay: 5000,
+                        },
+                        breakpoints: {
+                            985: {
+                                slidesPerView: 1.5,
+                            }
+                        }
+                    });
+
+                    //一時停止
+                    document.querySelector(".swiper_pause").addEventListener("click", function () {
+                        swiper.autoplay.stop();
+                        document.querySelector(".swiper_pause").classList.add("none");
+                        document.querySelector(".swiper_start").classList.remove("none");
+                    });
+                    //再生
+                    document.querySelector(".swiper_start").addEventListener("click", function () {
+                        swiper.autoplay.start();
+                        document.querySelector(".swiper_pause").classList.remove("none");
+                        document.querySelector(".swiper_start").classList.add("none");
+                    });
+                </script>
             </div>
-            <script src="/scripts/slider.js"></script>
         </section>
         <section id="news" class="default-width">
             <div class="top-section-title">

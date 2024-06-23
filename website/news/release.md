@@ -1,9 +1,9 @@
 ---
-title: テスト2
-description: YAMLからdescriptionを入れられるよ
-topics: 重要
+title: 高専カンファin首都 開催決定
+description: 「高専カンファレンスin首都 つながり~まだ見ぬ君とこの場所で~」を開催
+topics: お知らせ
 tags: トップ
-image: /images/member.png
+image: /images/poster.png
 displayslider: true
 date: 2024.05.25
 common_parts: page | article

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
     const slides = document.querySelector('.slides');
     const slideCount = document.querySelectorAll('.slide').length;
     const visibleSlides = 3;
@@ -38,10 +38,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToSlide(index) {
-        slides.style.transform = `translateX(-${index * slideWidth}%)`;
+        // 調整：スライドが中央に来るように計算
+        const offset = index - Math.floor(visibleSlides / 2);
+        const startIndex = Math.max(0, Math.min(slideCount - visibleSlides, offset));
+    
+        // 一旦全てのスライドからクラスを削除
+        const allSlides = document.querySelectorAll('.slide');
+        allSlides.forEach(slide => {
+            slide.classList.remove('slide-prev', 'slide-center', 'slide-next');
+        });
+    
+        // インデックスに対応するスライドにクラスを付ける
+        for (let i = 0; i < visibleSlides; i++) {
+            const slideIndex = startIndex + i;
+            if (slideIndex === index) {
+                allSlides[slideIndex].classList.add('slide-center');
+            } else if (slideIndex < index) {
+                allSlides[slideIndex].classList.add('slide-prev');
+            } else if (slideIndex > index) {
+                allSlides[slideIndex].classList.add('slide-next');
+            }
+        }
+    
         currentIndex = index;
         updateNavigation();
-    }
+    }       
 
     function nextSlide() {
         if (currentIndex < slideCount - visibleSlides) {
@@ -83,5 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
     playPauseButton.addEventListener('click', togglePlayPause);
 
     createNavigation();  // Create navigation dots
+    goToSlide(0);  // 最初に1枚目のスライドが中央に来るようにする
     playSlides();  // Start the slide show
-});
+}); */
