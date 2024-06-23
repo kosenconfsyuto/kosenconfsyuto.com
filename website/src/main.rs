@@ -297,7 +297,7 @@ async fn generate_sitemap() -> Result<impl Responder> {
         // 他の動的ニュースページのパスを追加
     ];
 
-    let base_url = "http://127.0.0.1:8000";
+    let base_url = "http://127.0.0.1:8005";
 
     let mut urls = Vec::new();
     for page in static_pages.iter().chain(dynamic_pages.iter()) {
@@ -357,7 +357,7 @@ async fn main() -> std::io::Result<()> {
                     .route(web::get().to(handle_request))
             )
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:8005")?
     .run()
     .await
 }
