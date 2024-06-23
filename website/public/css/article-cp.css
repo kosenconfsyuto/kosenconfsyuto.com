@@ -11,6 +11,11 @@
     margin: 0;
 }
 
+#article-cp h2 {
+    margin-top: 5rem;
+    margin-bottom: 1.5rem;
+}
+
 #article-cp ul {
     padding-inline-start: 20px;
 }
@@ -21,6 +26,12 @@
 
 #article-titles>h1 {
     padding-bottom: 2rem;
+}
+
+@media (max-width: 600px){
+    h1 {
+        font-size: 1.75rem;
+    }
 }
 
 #article-tags {
