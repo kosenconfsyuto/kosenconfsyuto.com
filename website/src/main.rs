@@ -38,9 +38,25 @@ struct ContactForm {
     message: String,
 }
 
-async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str) -> Result<String> {
+// 404ページのレンダリング
+async fn custom_404() -> Result<HttpResponse, actix_web::Error> {
+    let content = read_to_string("modules/404.html")
+        .map_err(|_| actix_web::error::ErrorNotFound("Custom 404 page not found"))?;
+    Ok(HttpResponse::NotFound().content_type(ContentType::html()).body(content))
+}
+
+
+async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str, all_news_list: &str) -> Result<String> {
     let file_path = format!("pages/{}.html", if path.ends_with('/') { format!("{}/index", path.trim_end_matches('/')) } else { path.to_string() });
-    let content = read_to_string(&file_path).map_err(|_| actix_web::error::ErrorNotFound("File not found"))?;
+    let content = match read_to_string(&file_path) {
+        Ok(content) => content,
+        Err(_) => {
+            let custom_404_response = custom_404().await?;
+            let body_bytes = actix_web::body::to_bytes(custom_404_response.into_body()).await?;
+            let custom_404_body = String::from_utf8(body_bytes.to_vec()).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to convert 404 body to string"))?;
+            return Ok(custom_404_body);
+        }        
+    };
     let parts: Vec<&str> = content.splitn(3, "---").collect();
     if parts.len() < 3 {
         return Err(actix_web::error::ErrorInternalServerError("Invalid front matter format"));
@@ -53,6 +69,7 @@ async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str
     context.insert("url", url);
     context.insert("access_count", &access_count.to_string());
     context.insert("newslist", news_list);
+    context.insert("allnewslist", all_news_list);
     if let Some(title) = yaml_data.title {
         context.insert("title", &title);
     }
@@ -83,7 +100,15 @@ async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str
 
 async fn render_markdown(path: &str, url: &str, access_count: usize) -> Result<String> {
     let file_path = format!("news/{}.md", path);
-    let content = read_to_string(&file_path).map_err(|_| actix_web::error::ErrorNotFound("File not found"))?;
+    let content = match read_to_string(&file_path) {
+        Ok(content) => content,
+        Err(_) => {
+            let custom_404_response = custom_404().await?;
+            let body_bytes = actix_web::body::to_bytes(custom_404_response.into_body()).await?;
+            let custom_404_body = String::from_utf8(body_bytes.to_vec()).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to convert 404 body to string"))?;
+            return Ok(custom_404_body);
+        }        
+    };
     let parts: Vec<&str> = content.splitn(3, "---").collect();
     if parts.len() < 3 {
         return Err(actix_web::error::ErrorInternalServerError("Invalid front matter format"));
@@ -195,13 +220,102 @@ async fn generate_news_list() -> Result<String> {
     Ok(news_list)
 }
 
+async fn generate_all_news_list() -> Result<String> {
+    let news_dir = std::fs::read_dir("news").map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news directory"))?;
+    let mut news_files: Vec<_> = news_dir
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| {
+            let path = entry.path();
+            if path.extension()? == "md" {
+                Some(path)
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    // Sort news files by date in descending order
+    news_files.sort_by_key(|path| {
+        let content = std::fs::read_to_string(path).ok()?;
+        let parts: Vec<&str> = content.splitn(3, "---").collect();
+        if parts.len() < 3 {
+            return None;
+        }
+        let yaml_str = parts[1];
+        let yaml_data: FrontMatter = from_str(yaml_str).ok()?;
+        yaml_data.date.and_then(|d| NaiveDate::parse_from_str(&d, "%Y.%m.%d").ok())
+    });
+    news_files.reverse();
+
+    // Select the latest all news
+    let latest_news_files = news_files.into_iter();
+
+    let mut tera = Tera::new("includes/**/*").unwrap();
+    let mut all_news_list = String::new();
+    for path in latest_news_files {
+        let content = std::fs::read_to_string(&path).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news file"))?;
+        let parts: Vec<&str> = content.splitn(3, "---").collect();
+        if parts.len() < 3 {
+            continue;
+        }
+        let yaml_str = parts[1];
+        let yaml_data: FrontMatter = from_str(yaml_str).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to parse YAML"))?;
+        let mut context = Context::new();
+        let path_str = path.file_stem().and_then(|s| s.to_str()).unwrap_or("");
+        context.insert("url", &format!("/news/{}", path_str));
+        if let Some(title) = yaml_data.title {
+            context.insert("title", &title);
+        }
+        if let Some(date) = yaml_data.date {
+            context.insert("date", &date);
+        }
+        if let Some(ref topics) = yaml_data.topics {
+            context.insert("topics", topics);
+        }
+        let important_news = if yaml_data.topics.as_deref() == Some("重要") {
+            "important-news"
+        } else {
+            ""
+        };
+        context.insert("important_news", important_news);
+
+        let news_item = tera.render("parts/news.html", &context).map_err(|e| {
+            eprintln!("Template rendering error: {:?}", e);
+            actix_web::error::ErrorInternalServerError("Failed to render news item template")
+        })?;
+        all_news_list.push_str(&news_item);
+    }
+    Ok(all_news_list)
+}
+
 async fn handle_request(req: HttpRequest, counter: web::Data<Arc<AtomicUsize>>) -> Result<impl Responder> {
-    let path = req.path().trim_start_matches('/');
+    let mut path = req.path().trim_start_matches('/').to_string();
+    if path.ends_with('/') {
+        path.pop();
+    }
+
     let url = req.uri().path();
+    // &str を String に変換する
+    let mut url_string = url.to_string();
+    
+    // 文字列 "index" を空文字列 "" に置き換える
+    if let Some(pos) = url_string.find("index") {
+        url_string.replace_range(pos..pos + 5, "");
+    }
+    
+    // 最後の文字が "/" であれば削除する
+    if url_string.ends_with('/') {
+        url_string.pop();
+    }
+
+    let url_str: &str = &url_string;
+
     let user_agent = req.headers().get("User-Agent").and_then(|h| h.to_str().ok()).unwrap_or("Unknown");
 
     // Generate news list
     let news_list = generate_news_list().await?;
+
+    let all_news_list = generate_all_news_list().await?;
 
     // Check if the file exists in the public directory
     let public_path = if path.is_empty() { "public/index.html".to_string() } else { format!("public/{}", path) };
@@ -232,12 +346,12 @@ async fn handle_request(req: HttpRequest, counter: web::Data<Arc<AtomicUsize>>) 
         .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to write to access.log"))?;
 
     let result = if path.is_empty() {
-        render_page("index", url, access_count, &news_list).await
+        render_page("index", url_str, access_count, &news_list, &all_news_list).await
     } else if path.starts_with("news/") {
         let relative_path = &path["news/".len()..];
-        render_markdown(relative_path, url, access_count).await
+        render_markdown(relative_path, url_str, access_count).await
     } else {
-        render_page(path, url, access_count, &news_list).await
+        render_page(&path, url_str, access_count, &news_list, &all_news_list).await
     };
 
     match result {
@@ -284,24 +398,46 @@ async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
 }
 
 async fn generate_sitemap() -> Result<impl Responder> {
-    let static_pages = vec![
-        "",
-        "about",
-        "contact",
-        // 他の静的ページのパスを追加
-    ];
-
-    let dynamic_pages = vec![
-        "news/2023/06/first-news",
-        "news/2023/07/second-news",
-        // 他の動的ニュースページのパスを追加
-    ];
-
     let base_url = "http://127.0.0.1:8000";
 
-    let mut urls = Vec::new();
-    for page in static_pages.iter().chain(dynamic_pages.iter()) {
-        urls.push(format!("{}/{}", base_url, encode(page)));
+    // Collect static pages from the pages directory
+    let static_pages = std::fs::read_dir("pages")
+        .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read pages directory"))?
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| {
+            let path = entry.path();
+            if path.extension()? == "html" {
+                Some(path)
+            } else {
+                None
+            }
+        })
+        .collect::<Vec<_>>();
+
+    // Collect dynamic news pages from the news directory
+    let news_files = std::fs::read_dir("news")
+        .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news directory"))?
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| {
+            let path = entry.path();
+            if path.extension()? == "md" {
+                Some(path)
+            } else {
+                None
+            }
+        })
+        .collect::<Vec<_>>();
+
+    // Generate URLs for static pages
+    let mut urls = static_pages.into_iter().map(|path| {
+        let relative_path = path.strip_prefix("pages").unwrap().to_str().unwrap().trim_end_matches(".html");
+        format!("{}/{}", base_url, encode(relative_path))
+    }).collect::<Vec<_>>();
+
+    // Generate URLs for news files
+    for path in news_files {
+        let relative_path = path.file_stem().and_then(|s| s.to_str()).unwrap_or("");
+        urls.push(format!("{}/news/{}", base_url, encode(relative_path)));
     }
 
     let mut sitemap = String::new();
@@ -312,6 +448,7 @@ async fn generate_sitemap() -> Result<impl Responder> {
         sitemap.push_str("  <url>\n");
         sitemap.push_str(&format!("    <loc>{}</loc>\n", url));
         sitemap.push_str("    <changefreq>weekly</changefreq>\n");
+        sitemap.push_str("  </url>\n");
     }
 
     sitemap.push_str("</urlset>");
