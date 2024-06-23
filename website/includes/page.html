@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,6 @@
     <meta property="og:image" content="https://asari-web.com{{image}}">
     <meta name="keywords" content="高専カンファレンス, 高専カンファ, 首都, 紹介サイト, {{tags}}">
     <meta name="description" content="{{description}}">
-    <!-- あとでcanonical修正しろよ -->
     <link rel="canonical" href="https://kosenconfsyuto.com{{url}}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@kosenconfsyuto" />
@@ -21,8 +21,79 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/logo.png" type="image/svg+xml">
 </head>
+
 <body>
-    {{contents}}
+    <header>
+        <div>
+            <a id="header-titles" href="/">
+                <img src="/images/logo.png" alt="高専カンファレンス in 首都">
+                <div id="header-title">
+                    <span class="text-1rem">高専カンファレンス</span>
+                    <br>
+                    <h1 class="text-1-5rem">in 首都</h1>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">Top</a>
+                    </li>
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    <li>
+                        <a href="/news">News</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+    <main>
+        {{contents}}
+    </main>
+    <footer>
+        <div id="footer-site-links">
+            <span class="text-1rem font-500">高専カンファレンス in 首都</span>
+            <ul>
+                <li>
+                    <a href="/about">開催概要</a>
+                </li>
+                <li>
+                    <a href="/privacy-policy">プライバシーポリシー</a>
+                </li>
+                <li>
+                    <a href="/contact">お問い合わせ</a>
+                </li>
+            </ul>
+        </div>
+        <div id="footer-sns-links">
+            <div id="footer-sns-buttons">
+                <a class="footer-sns-button" href="https://twitter.com/kosenconfsyuto" target="_blank">
+                    <img src="/public/icons/x-logo.png" alt="Twitter">
+                </a>
+                <a class="footer-sns-button" href="https://www.instagram.com/kosenconfsyuto/" target="_blank">
+                    <img src="/public/icons/insta-logo.png" alt="Instagram">
+                </a>
+                <a class="footer-sns-button" href="https://kosenconf.jp/?168syuto" target="_blank">
+                    <img src="/public/icons/kosenconf-logo.png" alt="高専カンファレンスWiki">
+                </a>
+            </div>
+            <div id="footer-share-button">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+                    data-show-count="false">
+                    <img src="/public/icons/share_24dp_FILL0_wght200_GRAD0_opsz24.svg" alt="share"
+                        style="filter: brightness(0);">
+                    <span class="text-1rem font-500">共有</span>
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

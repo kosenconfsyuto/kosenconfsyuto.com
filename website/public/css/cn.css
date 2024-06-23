@@ -1,0 +1,75 @@
+#cn {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+#cn-title {
+    border-radius: 1em;
+    padding: 4em 1em;
+    width: calc(100% - 2em);
+    color: #000;
+    background-image: url(/images/commonframe-bg.png);
+    background-position: center;
+    background-size: cover;
+}
+
+#cn-title>h1,
+#cn-title>p {
+    padding: 0.5em 0.25em;
+    background: rgba(0, 0, 0, 0.249);
+    backdrop-filter: blur(2em);
+    width: fit-content;
+    color: #FFF;
+    font-size: 1.5rem;
+    border-radius: 0.25em;
+}
+
+#cn-title>p {
+    margin-top: 0.25em;
+    font-size: 1rem;
+    padding: 0.25em;
+}
+
+@media (width < 767px) {
+    #cn-title>h1 {
+        font-size: 1.25rem;
+    }
+
+    #cn-title>p {
+        font-size: 0.75rem;
+    }
+}
+
+
+
+#cn-child {
+    background: #FFF;
+    color: #000;
+    padding: 1em;
+    border-radius: 1em;
+    margin: 1em 0;
+}
+
+/*
+@media (width > 80em) {
+    #cn-child {
+        border-radius: 1em;
+    }
+} */
+
+@media (width < 80em) {
+    main {
+        padding-top: 0;
+    }
+}
+
+header {
+    color: #000;
+}
+
+#header-title span,
+#header-title h1,
+header>div>nav>ul>li>a {
+    color: #000;
+}

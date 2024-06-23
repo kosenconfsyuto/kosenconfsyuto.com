@@ -5,6 +5,84 @@ tags: トップ
 image: /images/site-ogp.png
 common_parts: page
 ---
-<div id="top">
-    <h1>トップページ</h1>
+<link rel="stylesheet" href="/css/top.css">
+<div id="top-par">
+    <div id="top-main-contents">
+        <section id="top-flex" class="flex default-width">
+            <div id="top-flex-left">
+                <img src="/images/logo.png" alt="高専カンファレンス in 首都">
+                <h2 class="text-3rem font-700">高専<wbr />カンファ<wbr />レンス</h2>
+                <div class="flex space-between">
+                    <h1 class="text-4rem font-700">in 首都</h1>
+                    <div id="top-tpo-context">
+                        <p>March.2025</p>
+                        <p>東京23区内</p>
+                    </div>
+                </div>
+                <h3 class="text-2rem"><span class="text-1-5rem">テーマ:</span>つながり</h3>
+                <a href="https://kosenconf.jp/?168syuto" id="top-btn">Wikiを見る</a>
+            </div>
+            <div id="top-flex-right">
+                <div class="text-align-end">
+                    <p>アクセスカウンター</p>
+                    <span class="text-2rem font-700">{{access_count}}</span>
+                </div>
+            </div>
+        </section>
+        <section id="important-news" class="default-width">
+            <ul>
+                {{newslist}}
+            </ul>
+        </section>
+        <section id="slider">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide"><img src="/images/poster.png" class="w-full" /></div>
+                        <div class="slide"><img src="/images/member.png" class="w-full" /></div>
+                        <div class="slide"><img src="/images/narisumashi.png" class="w-full" /></div>
+                        <div class="slide"><img src="/images/narisumashi.png" class="w-full" /></div>
+                        <div class="slide"><img src="/images/poster.png" class="w-full" /></div>
+                        <div class="slide"><img src="/images/member.png" class="w-full" /></div>
+                    </div>
+                </div>
+                <div class="controls default-width">
+                    <div id="pause-par">
+                        <button class="control play-pause"><img
+                                src="/icons/pause_24dp_FILL1_wght200_GRAD0_opsz24.svg" /></button>
+                    </div>
+                    <div class="navigation"></div>
+                    <div class="flex gap-1em">
+                        <button class="control prev"><img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg"
+                                style="transform: rotate(180deg);" /></button>
+                        <button class="control next"><img
+                                src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" /></button>
+                    </div>
+                </div>
+            </div>
+            <script src="/scripts/slider.js"></script>
+        </section>
+        <section id="news" class="default-width">
+            <div class="top-section-title">
+                <h2>お知らせ</h2>
+            </div>
+            <ul>
+                {{newslist}}
+            </ul>
+        </section>
+        <section id="news">
+            <div class="default-width top-section-title">
+                <h2>会場</h2>
+            </div>
+            <div id="map">
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+    </div>
+    <div id="bg-follow-contents">
+        <img src="/images/shibuya-shape.png" alt="首都のビル群">
+    </div>
+    <div id="bg-fixed-contents">
+        <img src="/images/bg-object.svg" alt="背景オブジェクト">
+    </div>
 </div>

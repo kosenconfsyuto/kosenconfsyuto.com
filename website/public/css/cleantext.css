@@ -1,0 +1,39 @@
+.cleantext {
+    line-height: 2;
+    color: #000;
+}
+
+.cleantext h2 {
+    margin-top: 3em;
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+
+.cleantext h3 {
+    margin-top: 3em;
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+
+.cleantext h4 {
+    margin: 0.5em 0;
+    font-weight: 700;
+}
+
+.cleantext p {
+    font-weight: 400;
+}
+
+.cleantext ul {
+    padding-inline-start: 20px;
+}
+
+.cleantext ol {
+    padding-inline-start: 20px;
+}
+
+.cleantext table tbody tr th,
+.cleantext table tbody tr td {
+    text-align: start;
+    padding-right: 0.5em;
+}
