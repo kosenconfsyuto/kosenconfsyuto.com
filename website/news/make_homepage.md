@@ -3,7 +3,7 @@ title: ｢つながり｣を支える、ホームページ開発の裏側
 description: ホームページ全体のWeb開発についてのおはなし
 topics: テックブログ
 tags: 技術, Rust, Web, 高専カンファレンス, ホームページ
-image: /images/poster.png
+image: /images/tech-release-thumbnail.png
 displayslider: true
 date: 2024.06.22
 common_parts: page | article
