@@ -1,7 +1,8 @@
 <div id="kiriban" onclick="closekiriban()">
-    <div id="kiriban-contents">
+    <div id="kiriban-contents" onclick="childClick(event)">
         <div style="display: flex; justify-content: flex-end;">
-            <img src="/icons/xmark-solid.svg" alt="閉じる" id="kiriban-close" style="width: 1rem; height: 1rem;" onclick="closekiriban()">
+            <img src="/icons/xmark-solid.svg" alt="閉じる" id="kiriban-close" style="width: 1rem; height: 1rem;"
+                onclick="closekiriban()">
         </div>
         <div id="kiriban-flex-left">
             <h2 class="text-1rem font-700">おめでとうございます！<br>キリ番になりました！</h2>
@@ -17,5 +18,8 @@
 <script>
     function closekiriban() {
         document.getElementById("kiriban").style.display = "none";
+    }
+    function childClick(event) {
+        event.stopPropagation(); // Prevents the event from bubbling up to the parent element
     }
 </script>
