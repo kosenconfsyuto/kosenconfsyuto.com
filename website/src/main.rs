@@ -46,6 +46,17 @@ async fn custom_404() -> Result<HttpResponse, actix_web::Error> {
 }
 
 
+fn load_kiriban_content() -> Result<String, std::io::Error> {
+    let mut file = File::open("includes/kiriban.html")?;
+    let mut content = String::new();
+    file.read_to_string(&mut content)?;
+    Ok(content)
+}
+
+fn is_kiriban(access_count: usize) -> bool {
+    access_count % 100 == 0 || access_count % 111 == 0 || access_count % 1111 == 0 || access_count % 11111 == 0 || access_count % 111111 == 0 // キリ番の判定条件をここで定義
+}
+
 async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str, all_news_list: &str) -> Result<String> {
     let file_path = format!("pages/{}.html", if path.ends_with('/') { format!("{}/index", path.trim_end_matches('/')) } else { path.to_string() });
     let content = match read_to_string(&file_path) {
@@ -70,6 +81,7 @@ async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str
     context.insert("access_count", &access_count.to_string());
     context.insert("newslist", news_list);
     context.insert("allnewslist", all_news_list);
+
     if let Some(title) = yaml_data.title {
         context.insert("title", &title);
     }
@@ -90,6 +102,15 @@ async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str
             html_content = common_part_content.replace("{{contents}}", &html_content);
         }
     }
+
+    // キリ番の処理
+    let kiriban_content = if is_kiriban(access_count) {
+        load_kiriban_content().unwrap_or_default()
+    } else {
+        String::new()
+    };
+    html_content = html_content.replace("{{kiriban}}", &kiriban_content);
+
     let final_html = tera.render_str(&html_content, &context)
         .map_err(|e| {
             eprintln!("Template rendering error: {:?}", e);

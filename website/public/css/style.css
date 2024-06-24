@@ -221,6 +221,7 @@ footer {
 #footer-sns-buttons {
     display: flex;
     gap: 1em;
+    align-items: center;
 }
 
 .footer-sns-button {
@@ -232,6 +233,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: min-content;
+    height: min-content;
 }
 
 .footer-sns-button>img {
@@ -241,7 +244,8 @@ footer {
 
 @media screen and (max-width: 569px){
     .footer-sns-button {
-        padding: 0.5em;
+        padding: 0.75em;
+        border-radius: 0.75em;
     }
 
     .footer-sns-links {
@@ -270,6 +274,19 @@ footer {
     text-decoration: none;
     color: #000;
     gap: 1em;
+}
+
+@media screen and (max-width: 569px){
+    #footer-share-button>a {
+        padding: 0.75em;
+        border-radius: 0.75em;
+        gap: 0.75em;
+    }
+
+    #footer-share-button>a>img {
+        width: 1rem;
+        height: 1rem;
+    }
 }
 
 #top-par {
@@ -820,4 +837,60 @@ a.important-news:hover {
     header>div>nav {
         display: none;
     }
+}
+
+#kiriban {
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00000062;
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+#kiriban-contents {
+    background: #FFF;
+    padding: 2em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    color: #000;
+}
+
+#kiriban-flex-left {
+    text-align: center;
+}
+
+#kiriban-flex-left>h2 {
+    font-size: 1.25em;
+}
+
+#kiriban-btn {
+    padding: 1em 2em;
+    background: #000;
+    color: #FFF;
+    border: none;
+    border-radius: 0.5em;
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    text-decoration: none;
+    gap: 0.5em;
+}
+
+#kiriban-btn>img {
+    width: 1.5em;
+    height: 1.5em;
+    filter: invert(1);
+}
+
+.swiper-pagination-bullet-active {
+    background: #D6C000 !important;
 }
