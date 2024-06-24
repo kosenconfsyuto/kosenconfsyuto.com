@@ -1,13 +1,21 @@
-<div id="kiriban" onclick="closekiriban">
+<div id="kiriban" onclick="closekiriban()">
     <div id="kiriban-contents">
+        <div style="display: flex; justify-content: flex-end;">
+            <img src="/icons/xmark-solid.svg" alt="閉じる" id="kiriban-close" style="width: 1rem; height: 1rem;" onclick="closekiriban()">
+        </div>
         <div id="kiriban-flex-left">
             <h2 class="text-1rem font-700">おめでとうございます！<br>キリ番になりました！</h2>
             <p class="text-1rem">アクセスカウンター</p>
             <span class="text-2rem font-700">{{access_count}}</span>
         </div>
-        <a href="https://twitter.com/share?text=キリ番になりました！" id="kiriban-btn">
-            <img src="/public/icons/x-logo.png" alt="Twitter" loading="lazy">
+        <a href="https://twitter.com/share?text=キリ番({{access_count}}番)になりました！" id="kiriban-btn" target="_blank">
+            <img src="/icons/x-logo.png" alt="Twitter" loading="lazy">
             <p>キリ番をTwitterで共有</p>
         </a>
     </div>
 </div>
+<script>
+    function closekiriban() {
+        document.getElementById("kiriban").style.display = "none";
+    }
+</script>

@@ -54,7 +54,19 @@ fn load_kiriban_content() -> Result<String, std::io::Error> {
 }
 
 fn is_kiriban(access_count: usize) -> bool {
-    access_count % 100 == 0 || access_count % 111 == 0 || access_count % 1111 == 0 || access_count % 11111 == 0 || access_count % 111111 == 0 // キリ番の判定条件をここで定義
+    // キリ番の判定
+    if access_count % 100 == 0 {
+        return true;
+    }
+
+    // ゾロ目の判定
+    let access_str = access_count.to_string();
+    let first_char = access_str.chars().next().unwrap();
+    if access_str.chars().all(|c| c == first_char) {
+        return true;
+    }
+
+    false
 }
 
 async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str, all_news_list: &str) -> Result<String> {
