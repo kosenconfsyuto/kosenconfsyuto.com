@@ -29,6 +29,14 @@
     width: 100%;
 }
 
+#article-cp a {
+    color: var(--theme);
+}
+
+#article-cp a:visited {
+    color: var(--theme-visited);
+}
+
 #article-titles>p {
     font-weight: 600;
     color: #2f2f2f;
