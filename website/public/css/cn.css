@@ -1,3 +1,7 @@
+:root {
+    --cn-text-color: #000;
+}
+
 #cn {
     display: flex;
     flex-direction: column;
@@ -8,7 +12,7 @@
     border-radius: 1em;
     padding: 4em 1em;
     width: calc(100% - 2em);
-    color: #000;
+    color: var(--cn-text-color);
     background-image: url(/images/comframe-bg.jpg);
     background-position: center;
     background-size: cover;
@@ -46,7 +50,7 @@
 
 #cn-child {
     background: #FFF;
-    color: #000;
+    color: var(--cn-text-color);
     padding: 1em;
     border-radius: 1em;
     margin: 1em 0;
@@ -66,11 +70,29 @@
 }
 
 header {
-    color: #000;
+    color: var(--cn-text-color);
 }
 
 #header-title span,
 #header-title h1,
 header>div>nav>ul>li>a {
-    color: #000;
+    color: var(--cn-text-color);
+}
+
+.hm-open #header-title span,
+.hm-open #header-title h1,
+.hm-open>nav>ul>li>a {
+    color: var(--text);
+}
+
+.hm-open svg {
+    fill: var(--text);
+}
+
+.hamburger svg {
+    fill: var(--cn-text-color);
+}
+
+.hm-open svg {
+    fill: var(--text);
 }

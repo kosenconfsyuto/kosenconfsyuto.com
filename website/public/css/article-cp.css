@@ -1,6 +1,10 @@
+:root {
+    --article-text-color: #000;
+}
+
 #article-cp {
     line-height: 2;
-    color: #000;
+    color: var(--article-text-color);
     padding: 1em;
     width: calc(100% - 2em);
     max-width: 60em;
@@ -50,14 +54,29 @@
 
 #article-tags>div>img {
     filter: brightness(0);
+    width: 1.5em;
 }
 
 header {
-    color: #000;
+    color: var(--article-text-color);
 }
 
 #header-title span,
 #header-title h1,
 header>div>nav>ul>li>a {
-    color: #000;
+    color: var(--article-text-color);
+}
+
+.hamburger svg {
+    fill: var(--article-text-color);
+}
+
+.hm-open #header-title span,
+.hm-open #header-title h1,
+.hm-open>nav>ul>li>a {
+    color: var(--text);
+}
+
+.hm-open svg {
+    fill: var(--text);
 }

@@ -88,7 +88,7 @@ body {
 
 header {
     color: var(--text);
-    padding: 1em 2em;
+    padding: 1em;
     z-index: 1000;
     position: sticky;
     top: 0;
@@ -159,7 +159,7 @@ main {
 
 footer {
     position: relative;
-    z-index: 1000;
+    z-index: 500;
 }
 
 #footer-site-links {
@@ -625,6 +625,13 @@ footer {
     overflow: hidden;
 }
 
+@media (width < 985px) {
+    #slider {
+        width: calc(100% - 2rem);
+        margin: 0 auto;
+    }
+}
+
 .none {
     display: none;
 }
@@ -650,8 +657,8 @@ footer {
 }
 
 .hamburger>svg {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     fill: var(--text);
 }
 

@@ -398,7 +398,7 @@ async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
 }
 
 async fn generate_sitemap() -> Result<impl Responder> {
-    let base_url = "http://127.0.0.1:8000";
+    let base_url = "https://kosenconfsyuto.com";
 
     // Collect static pages from the pages directory
     let static_pages = std::fs::read_dir("pages")
@@ -431,7 +431,12 @@ async fn generate_sitemap() -> Result<impl Responder> {
     // Generate URLs for static pages
     let mut urls = static_pages.into_iter().map(|path| {
         let relative_path = path.strip_prefix("pages").unwrap().to_str().unwrap().trim_end_matches(".html");
-        format!("{}/{}", base_url, encode(relative_path))
+        let relative_path = if relative_path == "index" {
+            ""
+        } else {
+            relative_path.trim_end_matches("index")
+        };
+        format!("{}/{}", base_url, encode(relative_path).trim_end_matches('/'))
     }).collect::<Vec<_>>();
 
     // Generate URLs for news files

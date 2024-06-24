@@ -36,7 +36,7 @@
 
 <body>
     <header>
-        <div>
+        <div id="header-contents" class="defualt">
             <a id="header-titles" href="/">
                 <img src="/images/logo.png" alt="高専カンファレンス in 首都" loading="lazy">
                 <div id="header-title">
@@ -98,60 +98,6 @@
         <div id="pages-contents">
             {{contents}}
         </div>
-        <script>
-            function fadeIn(element, duration) {
-                element.style.display = 'block';
-                element.style.opacity = 0;
-                let startTime = performance.now();
-
-                function fade() {
-                    let elapsed = performance.now() - startTime;
-                    let progress = elapsed / duration;
-                    if (progress < 1) {
-                        element.style.opacity = progress;
-                        requestAnimationFrame(fade);
-                    } else {
-                        element.style.opacity = 1;
-                    }
-                }
-
-                requestAnimationFrame(fade);
-            }
-
-            function fadeOut(element, duration) {
-                let startTime = performance.now();
-
-                function fade() {
-                    let elapsed = performance.now() - startTime;
-                    let progress = elapsed / duration;
-                    if (progress < 1) {
-                        element.style.opacity = 1 - progress;
-                        requestAnimationFrame(fade);
-                    } else {
-                        element.style.opacity = 0;
-                        element.style.display = 'none';
-                    }
-                }
-
-                requestAnimationFrame(fade);
-            }
-
-            function toggleMenu() {
-                var menu = document.getElementById('menu');
-                var openButton = document.querySelector('.hm-open-button');
-                var closeButton = document.querySelector('.hm-close-button');
-
-                if (menu.style.display === 'block' && menu.style.opacity == 1) {
-                    fadeOut(menu, 300); // 300msでフェードアウト
-                    openButton.style.display = 'block';
-                    closeButton.style.display = 'none';
-                } else {
-                    fadeIn(menu, 300); // 300msでフェードイン
-                    openButton.style.display = 'none';
-                    closeButton.style.display = 'block';
-                }
-            }
-        </script>
     </main>
     <footer>
         <div id="footer-site-links">
@@ -181,7 +127,7 @@
                 </a>
             </div>
             <div id="footer-share-button">
-                <a href="https://twitter.com/share?url=https://kosenconfsyuto.com{{url}}&text=『{{description}}』&hashtags=kosenconf168syuto"
+                <a href="https://twitter.com/share?url=https://kosenconfsyuto.com{{url}}&text=『{{title}}: {{description}}』&hashtags=kosenconf168syuto"
                     class="twitter-share-button" data-show-count="false">
                     <img src="/public/icons/share_24dp_FILL0_wght200_GRAD0_opsz24.svg" alt="share"
                         style="filter: brightness(0);" loading="lazy">
@@ -190,6 +136,62 @@
             </div>
         </div>
     </footer>
+    <script>
+        function fadeIn(element, duration) {
+            element.style.display = 'block';
+            element.style.opacity = 0;
+            let startTime = performance.now();
+
+            function fade() {
+                let elapsed = performance.now() - startTime;
+                let progress = elapsed / duration;
+                if (progress < 1) {
+                    element.style.opacity = progress;
+                    requestAnimationFrame(fade);
+                } else {
+                    element.style.opacity = 1;
+                }
+            }
+
+            requestAnimationFrame(fade);
+        }
+
+        function fadeOut(element, duration) {
+            let startTime = performance.now();
+
+            function fade() {
+                let elapsed = performance.now() - startTime;
+                let progress = elapsed / duration;
+                if (progress < 1) {
+                    element.style.opacity = 1 - progress;
+                    requestAnimationFrame(fade);
+                } else {
+                    element.style.opacity = 0;
+                    element.style.display = 'none';
+                }
+            }
+
+            requestAnimationFrame(fade);
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            var openButton = document.querySelector('.hm-open-button');
+            var closeButton = document.querySelector('.hm-close-button');
+
+            if (menu.style.display === 'block' && menu.style.opacity == 1) {
+                fadeOut(menu, 300); // 300msでフェードアウト
+                openButton.style.display = 'block';
+                closeButton.style.display = 'none';
+                document.getElementById('header-contents').classList.remove('hm-open');
+            } else {
+                fadeIn(menu, 300); // 300msでフェードイン
+                openButton.style.display = 'none';
+                closeButton.style.display = 'block';
+                document.getElementById('header-contents').classList.add('hm-open');
+            }
+        }
+    </script>
 </body>
 
 </html>
