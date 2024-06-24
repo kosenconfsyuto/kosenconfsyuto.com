@@ -207,6 +207,10 @@ footer {
     font-size: 0.75em;
 }
 
+#footer-site-links>ul>li>a:hover {
+    color: #a8a8a8;
+}
+
 #footer-sns-links {
     display: flex;
     justify-content: space-between;
