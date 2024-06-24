@@ -174,6 +174,7 @@ async fn render_markdown(path: &str, url: &str, access_count: usize) -> Result<S
     if let Some(topics) = yaml_data.topics {
         context.insert("topics", &topics);
     }
+
     let mut final_html = html_output;
     if let Some(common_parts) = yaml_data.common_parts {
         let parts: Vec<&str> = common_parts.split('|').map(|s| s.trim()).collect();
@@ -183,6 +184,15 @@ async fn render_markdown(path: &str, url: &str, access_count: usize) -> Result<S
             final_html = common_part_content.replace("{{contents}}", &final_html);
         }
     }
+
+    // キリ番の処理
+    let kiriban_content = if is_kiriban(access_count) {
+        load_kiriban_content().unwrap_or_default()
+    } else {
+        String::new()
+    };
+    final_html = final_html.replace("{{kiriban}}", &kiriban_content);
+
     let final_html = tera.render_str(&final_html, &context)
         .map_err(|e| {
             eprintln!("Template rendering error: {:?}", e);
