@@ -135,6 +135,12 @@ async fn render_markdown(path: &str, url: &str, access_count: usize) -> Result<S
     if let Some(image) = yaml_data.image {
         context.insert("image", &image);
     }
+    if let Some(date) = yaml_data.date {
+        context.insert("date", &date);
+    }
+    if let Some(topics) = yaml_data.topics {
+        context.insert("topics", &topics);
+    }
     let mut final_html = html_output;
     if let Some(common_parts) = yaml_data.common_parts {
         let parts: Vec<&str> = common_parts.split('|').map(|s| s.trim()).collect();
@@ -182,7 +188,7 @@ async fn generate_news_list() -> Result<String> {
     // Select the latest 5 news
     let latest_news_files = news_files.into_iter().take(5);
 
-    let mut tera = Tera::new("includes/**/*").unwrap();
+    let tera = Tera::new("includes/**/*").unwrap();
     let mut news_list = String::new();
     for path in latest_news_files {
         let content = std::fs::read_to_string(&path).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news file"))?;
@@ -250,7 +256,7 @@ async fn generate_all_news_list() -> Result<String> {
     // Select the latest all news
     let latest_news_files = news_files.into_iter();
 
-    let mut tera = Tera::new("includes/**/*").unwrap();
+    let tera = Tera::new("includes/**/*").unwrap();
     let mut all_news_list = String::new();
     for path in latest_news_files {
         let content = std::fs::read_to_string(&path).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news file"))?;

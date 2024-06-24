@@ -78,11 +78,15 @@
     --text: #FFF;
     --thin-border-color: #E4E4E4;
     --theme: #0D71D6;
+    --alert-color: #ff0000;
+    --text-reverse: #000;
 }
 
 body {
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: #F5F5F5;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: #f4f4f4;
     color: var(--text);
 }
 
@@ -120,6 +124,10 @@ header {
     height: 3em;
 }
 
+#header-titles:hover {
+    opacity: .64;
+}
+
 #header-title {
     height: fit-content;
     width: 100%;
@@ -150,6 +158,10 @@ header>div>nav>ul>li>a {
     text-decoration: none;
     font-weight: 600;
     color: var(--text);
+}
+
+header>div>nav>ul>li>a:hover {
+    opacity: 0.64;
 }
 
 main {
@@ -220,6 +232,21 @@ footer {
 .footer-sns-button>img {
     width: 1.5em;
     height: 1.5em;
+}
+
+@media screen and (max-width: 569px){
+    .footer-sns-button {
+        padding: 0.5em;
+    }
+
+    .footer-sns-links {
+        padding: 0.5em 1em;
+    }
+
+    .footer-sns-button>img {
+        width: 1em;
+        height: 1em;
+    }
 }
 
 #footer-share-button {
@@ -318,6 +345,7 @@ footer {
 
 #top-tpo-context {
     text-align: end;
+    font-weight: 600;
 }
 
 @media (max-width: 379px) {
@@ -340,6 +368,11 @@ footer {
     background: var(--text);
     border-radius: 1em;
     text-decoration: none;
+    font-weight: 600;
+}
+
+#top-btn:hover {
+    background: #f6f6f6;
 }
 
 #top-flex-right {
@@ -432,6 +465,30 @@ footer {
 
 .important-news>div>div>.topics-tip {
     background: rgba(255, 0, 0, 0.2);
+}
+
+.news>div>div {
+    font-weight: 500;
+}
+
+a.news:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transition: background 0.25s;
+}
+
+a.important-news:hover {
+    background: rgba(255, 0, 0, 0.6);
+    transition: background 0.25s;
+}
+
+#news-page .news .topics-tip {
+    background: var(--text);
+    color: var(--text-reverse);
+}
+
+#news-page .important-news .topics-tip {
+    background: var(--text);
+    color: var(--alert-color);
 }
 
 #important-news .news {
@@ -592,6 +649,13 @@ footer {
     height: 2.25rem;
 }
 
+@media screen and (max-width: 600px){
+    .control img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
 .control:hover {
     background-color: #ffffff61;
 }
@@ -623,6 +687,13 @@ footer {
 .swiper-slide {
     border-radius: 1rem;
     overflow: hidden;
+    background-color: transparent;
+}
+
+.swiper-slide>a {
+    width: fit-content;
+    height: fit-content;
+    background: transparent;
 }
 
 @media (width < 985px) {

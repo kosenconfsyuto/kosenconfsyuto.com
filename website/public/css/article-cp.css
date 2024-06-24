@@ -29,13 +29,24 @@
     width: 100%;
 }
 
+#article-titles>p {
+    font-weight: 600;
+    color: #2f2f2f;
+}
+
 #article-titles>h1 {
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 0.5rem 0;
+}
+
+#article-date {
     padding-bottom: 2rem;
 }
 
 @media (max-width: 600px){
     h1 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -59,12 +70,17 @@
 
 header {
     color: var(--article-text-color);
+    background: #ffffff11;
 }
 
 #header-title span,
 #header-title h1,
 header>div>nav>ul>li>a {
     color: var(--article-text-color);
+}
+
+#footer-site-links {
+    border-top: #efefef 0.0625rem solid;
 }
 
 .hamburger svg {
