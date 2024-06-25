@@ -305,7 +305,7 @@ footer {
 #footer-site-links {
     display: flex;
     justify-content: space-between;
-    padding: 2em;
+    padding: 1em;
     background: var(--footer-site-links-bg);
     align-items: center;
 }
@@ -362,7 +362,7 @@ footer {
 #footer-sns-links {
     display: flex;
     justify-content: space-between;
-    padding: 2em;
+    padding: 1em;
     background: var(--fsnsl-bg-color);
 }
 
@@ -1047,9 +1047,9 @@ a.important-news:hover {
 
 .toggle-container {
     display: flex;
-    gap: 1em;
+    gap: 0.5em;
     background: var(--fsnsl-bg-color);
-    padding: 0.5rem;
+    padding: 0.25rem;
     border-radius: 0.5em;
     width: fit-content;
 }
@@ -1058,6 +1058,11 @@ a.important-news:hover {
     border-radius: 1em;
     display: flex;
     align-items: center;
+    padding: 0.25em;
+}
+
+.toggle-container>div:hover {
+    background: var(--fsnsb-bg-color);
 }
 
 .light-theme .toggle-container>div>img {
