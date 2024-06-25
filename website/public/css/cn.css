@@ -1,5 +1,25 @@
-:root {
+html.light-theme {
     --cn-text-color: #000;
+    --cn-thin-bg-color: #FFF;
+}
+
+html.dark-theme {
+    --cn-text-color: #FFF;
+    --cn-thin-bg-color: #383838;
+}
+
+@media (prefers-color-scheme: light) {
+    html.system-theme {
+        --cn-text-color: #000;
+        --cn-thin-bg-color: #FFF;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html.system-theme {
+        --cn-text-color: #FFF;
+        --cn-thin-bg-color: #383838;
+    }
 }
 
 #cn {
@@ -49,7 +69,7 @@
 
 
 #cn-child {
-    background: #ffffff;
+    background: var(--cn-thin-bg-color);
     color: var(--cn-text-color);
     padding: 1em;
     border-radius: 1em;

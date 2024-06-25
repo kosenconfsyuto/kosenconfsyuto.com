@@ -1,6 +1,6 @@
 .cleantext {
     line-height: 2;
-    color: #000;
+    color: var(--text-reverse);
 }
 
 .cleantext h2 {
@@ -30,6 +30,14 @@
 
 .cleantext ol {
     padding-inline-start: 20px;
+}
+
+.cleantext a {
+    color: var(--theme);
+}
+
+.cleantext a:visited {
+    color: var(--theme-visited);
 }
 
 .cleantext table tbody tr th,

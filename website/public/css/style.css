@@ -67,6 +67,26 @@
     padding: 1em 0;
 }
 
+.dark-theme .d-brightness0-8 {
+    filter: brightness(0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+    .system-theme .d-brightness0-8 {
+        filter: brightness(0.8);
+    }
+}
+
+.dark-theme .d-invert {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .system-theme .d-invert {
+        filter: invert(1);
+    }
+}
+
 /* 簡略化用ここまで */
 
 * {
@@ -74,20 +94,127 @@
     padding: 0;
 }
 
-:root {
+html.light-theme {
     --text: #FFF;
+    --n-text: #ffffff;
     --thin-border-color: #E4E4E4;
     --theme: #0D71D6;
     --theme-visited: #00458a;
-    --alert-color: #ff0000;
+    --alert-color: #e33a3a;
     --text-reverse: #000;
+    --bg-color: #f4f4f4;
+    --header-bg: #00000011;
+    --footer-site-links-bg: #ffffff;
+    --fsl-text-color: #575757;
+    --fsl-text-color-hover: #a8a8a8;
+    --fsnsl-bg-color: #F8F8F8;
+    --fsnsb-bg-color: #F2F2F2;
+    --fsnsb-border-color: #E2E2E2;
+    --w-btn-hover: #f6f6f6;
+    --news-bg: rgba(0, 0, 0, 0.2);
+    --news-bg-hover: rgba(0, 0, 0, 0.4);
+    --important-news-bg: rgba(255, 0, 0, 0.41);
+    --important-news-bg-hover: rgba(255, 0, 0, 0.6);
+    --form-border: #dcdcdc;
+    --ctrl-hover: #ffffff61;
+    --news-page-news-bg: #4a4a4a;
+    --dot-active: #D6C000;
+    --menu-bg: rgba(0, 0, 0, 0.7);
+}
+
+html.dark-theme {
+    --text: #ffffffeb;
+    --n-text: #000000;
+    --thin-border-color: #323232;
+    --theme: #abd5ff;
+    --theme-visited: #2a95ff;
+    --alert-color: #b40000;
+    --text-reverse: #ffffff;
+    --bg-color: #1a1a1a;
+    --header-bg: #ffffff11;
+    --footer-site-links-bg: #2b2b2b;
+    --fsl-text-color: #cdcdcd;
+    --fsl-text-color-hover: #787878;
+    --fsnsl-bg-color: #1f1f1f;
+    --fsnsb-bg-color: #2b2b2b;
+    --fsnsb-border-color: #323232;
+    --w-btn-hover: #b1b1b1;
+    --news-bg: rgba(255, 255, 255, 0.2);
+    --news-bg-hover: rgba(255, 255, 255, 0.4);
+    --important-news-bg: rgba(185, 0, 0, 0.2);
+    --important-news-bg-hover: rgba(185, 0, 0, 0.4);
+    --form-border: #323232;
+    --ctrl-hover: #00000061;
+    --news-page-news-bg: #4a4a4a;
+    --dot-active: #D6C000;
+    --menu-bg: rgba(0, 0, 0, 0.7);
+}
+
+@media (prefers-color-scheme: light) {
+    html.system-theme {
+        --text: #FFF;
+        --n-text: #ffffff;
+        --thin-border-color: #E4E4E4;
+        --theme: #0D71D6;
+        --theme-visited: #00458a;
+        --alert-color: #e33a3a;
+        --text-reverse: #000;
+        --bg-color: #f4f4f4;
+        --header-bg: #00000011;
+        --footer-site-links-bg: #ffffff;
+        --fsl-text-color: #575757;
+        --fsl-text-color-hover: #a8a8a8;
+        --fsnsl-bg-color: #F8F8F8;
+        --fsnsb-bg-color: #F2F2F2;
+        --fsnsb-border-color: #E2E2E2;
+        --w-btn-hover: #f6f6f6;
+        --news-bg: rgba(0, 0, 0, 0.2);
+        --news-bg-hover: rgba(0, 0, 0, 0.4);
+        --important-news-bg: rgba(255, 0, 0, 0.41);
+        --important-news-bg-hover: rgba(255, 0, 0, 0.6);
+        --form-border: #dcdcdc;
+        --ctrl-hover: #ffffff61;
+        --news-page-news-bg: #4a4a4a;
+        --dot-active: #D6C000;
+        --menu-bg: rgba(0, 0, 0, 0.7);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html.system-theme {
+        --text: #ffffffeb;
+        --n-text: #000000;
+        --thin-border-color: #323232;
+        --theme: #abd5ff;
+        --theme-visited: #69b4ff;
+        --alert-color: #b40000;
+        --text-reverse: #ffffff;
+        --bg-color: #1a1a1a;
+        --header-bg: #ffffff11;
+        --footer-site-links-bg: #2b2b2b;
+        --fsl-text-color: #cdcdcd;
+        --fsl-text-color-hover: #787878;
+        --fsnsl-bg-color: #1f1f1f;
+        --fsnsb-bg-color: #2b2b2b;
+        --fsnsb-border-color: #323232;
+        --w-btn-hover: #b1b1b1;
+        --news-bg: rgba(255, 255, 255, 0.2);
+        --news-bg-hover: rgba(255, 255, 255, 0.4);
+        --important-news-bg: rgba(185, 0, 0, 0.2);
+        --important-news-bg-hover: rgba(185, 0, 0, 0.4);
+        --form-border: #323232;
+        --ctrl-hover: #00000061;
+        --news-page-news-bg: #4a4a4a;
+        --dot-active: #D6C000;
+        --menu-bg: rgba(0, 0, 0, 0.7);
+    }
 }
 
 body {
     font-family: 'Noto Sans JP', sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: #f4f4f4;
+    background-color: var(--bg-color);
     color: var(--text);
 }
 
@@ -100,7 +227,7 @@ header {
     left: 0;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background: #00000011;
+    background: var(--header-bg);
 }
 
 #header-titles {
@@ -177,45 +304,66 @@ footer {
 
 #footer-site-links {
     display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background: var(--footer-site-links-bg);
+    align-items: center;
+}
+
+#footer-site-links>div {
+    display: flex;
     justify-content: flex-start;
     gap: 2em;
-    padding: 2em;
-    background: #fff;
 }
 
 @media (max-width: 569px) {
 
-    #footer-site-links,
-    #footer-site-links>ul {
+    #footer-site-links>div,
+    #footer-site-links>div>ul {
         flex-direction: column;
     }
 }
 
-#footer-site-links>span {
-    color: #000;
+#footer-site-links>div>span {
+    color: var(--text-reverse);
 }
 
-#footer-site-links>ul {
+#footer-site-links>div>ul {
     list-style: none;
     display: flex;
     gap: 1em;
 }
 
-#footer-site-links>ul>li>a {
+#footer-site-links>div>ul>li>a {
     text-decoration: none;
-    color: #575757;
+    color: var(--fsl-text-color);
     font-size: 0.75em;
 }
 
-#footer-site-links>ul>li>a:hover {
-    color: #a8a8a8;
+#footer-site-links>div>ul>li>a:hover {
+    color: var(--fsl-text-color-hover);
+}
+
+@media (max-width: 719px) {
+    #footer-site-links {
+        flex-direction: column;
+        gap: 1em;
+        align-items: flex-start;
+    }
+
+    #footer-site-links>#theme-toggle-par {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        flex-direction: row;
+    }
 }
 
 #footer-sns-links {
     display: flex;
     justify-content: space-between;
     padding: 2em;
-    background: #F8F8F8;
+    background: var(--fsnsl-bg-color);
 }
 
 #footer-sns-buttons {
@@ -226,8 +374,8 @@ footer {
 
 .footer-sns-button {
     aspect-ratio: 1 / 1;
-    background: #F2F2F2;
-    border: #E2E2E2 0.0625rem solid;
+    background: var(--fsnsb-bg-color);
+    border: var(--fsnsb-border-color) 0.0625rem solid;
     border-radius: 1em;
     padding: 1em;
     display: flex;
@@ -264,16 +412,26 @@ footer {
 }
 
 #footer-share-button>a {
-    background: #F2F2F2;
-    border: #E2E2E2 0.0625rem solid;
+    background: var(--fsnsb-bg-color);
+    border: var(--fsnsb-border-color) 0.0625rem solid;
     border-radius: 1em;
     padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #000;
+    color: var(--text-reverse);
     gap: 1em;
+}
+
+.light-theme #footer-share-button>a>img {
+    filter: brightness(0);
+}
+
+@media (prefers-color-scheme: light) {
+    .system-theme #footer-share-button>a>img {
+        filter: brightness(0);
+    }
 }
 
 @media screen and (max-width: 569px){
@@ -394,7 +552,7 @@ footer {
 }
 
 #top-btn:hover {
-    background: #f6f6f6;
+    background: var(--w-btn-hover);
 }
 
 #top-flex-right {
@@ -435,7 +593,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--news-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 1.5em 1em;
@@ -466,7 +624,7 @@ footer {
 }
 
 .important-news {
-    background: rgba(255, 0, 0, 0.41);
+    background: var(--important-news-bg);
 }
 
 .important-news>img {
@@ -480,13 +638,23 @@ footer {
 .topics-tip {
     padding: 0.5em 1em;
     border-radius: 0.5em;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--news-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 }
 
+.dark-theme .topics-tip {
+    background: rgba(133, 146, 216, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .system-theme .topics-tip {
+        background: rgba(133, 146, 216, 0.2);
+    }
+}
+
 .important-news>div>div>.topics-tip {
-    background: rgba(255, 0, 0, 0.2);
+    background: var(--important-news-bg);
 }
 
 .news>div>div {
@@ -494,17 +662,16 @@ footer {
 }
 
 a.news:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--news-bg-hover);
     transition: background 0.25s;
 }
 
 a.important-news:hover {
-    background: rgba(255, 0, 0, 0.6);
+    background: var(--important-news-bg-hover);
     transition: background 0.25s;
 }
 
 #news-page .news .topics-tip {
-    background: var(--text);
     color: var(--text-reverse);
 }
 
@@ -559,7 +726,7 @@ a.important-news:hover {
     display: flex;
     text-align: center;
     align-items: center;
-    color: #000;
+    color: var(--text-reverse);
     font-size: 2em;
     font-weight: 500;
     width: 100%;
@@ -569,14 +736,27 @@ a.important-news:hover {
     justify-content: center;
 }
 
+.dark-theme #map>p {
+    backdrop-filter: blur(10px) brightness(0.5);
+    -webkit-backdrop-filter: blur(10px) brightness(0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+    .system-theme #map>p {
+        backdrop-filter: blur(10px) brightness(0.5);
+        -webkit-backdrop-filter: blur(10px) brightness(0.5);
+    }
+}
+
 #contact>form>div>input,
 #contact>form>div>textarea {
     width: calc(100% - 2.125em);
     padding: 1em;
-    border: #dcdcdc 0.0625rem solid;
+    border: var(--form-border) 0.0625rem solid;
     border-radius: 0.5em;
     max-width: calc(100% - 2.125em);
     min-width: calc(100% - 2.125em);
+    background: var(--bg-color);
 }
 
 #contact>form {
@@ -594,7 +774,7 @@ a.important-news:hover {
 #contact>form>input[type="submit"] {
     padding: 1em 2em;
     background: var(--theme);
-    color: #fff;
+    color: var(--n-text);
     border: none;
     border-radius: 0.5em;
     width: fit-content;
@@ -609,11 +789,11 @@ a.important-news:hover {
 }
 
 #news-page>ul>li>a.news {
-    background: rgb(74, 74, 74);
+    background: var(--news-page-news-bg);
 }
 
 #news-page>ul>li>a.important-news {
-    background: rgb(227, 58, 58);
+    background: var(--alert-color);
 }
 
 /* スライダー */
@@ -652,8 +832,8 @@ a.important-news:hover {
 
 .control {
     background: transparent;
-    color: #fff;
-    border: #FFF 0.0625rem solid;
+    color: var(--text);
+    border: var(--text) 0.0625rem solid;
     padding: 0.5em;
     margin: 0 5px;
     cursor: pointer;
@@ -679,25 +859,13 @@ a.important-news:hover {
 }
 
 .control:hover {
-    background-color: #ffffff61;
+    background-color: var(--ctrl-hover);
 }
 
 .navigation {
     display: flex;
     gap: 0.5em;
     align-items: center;
-}
-
-.dot {
-    width: 0.625em;
-    height: 0.625em;
-    display: block;
-    background: #FFF;
-    border-radius: 100px;
-}
-
-.dot.active {
-    background: #D6C000;
 }
 
 .swiper-pause-par {
@@ -741,11 +909,8 @@ a.important-news:hover {
 
 .hamburger {
     display: none;
-    /* デフォルトで表示 */
     cursor: pointer;
-    /* ポインターを変更 */
     z-index: 1000;
-    /* メニューが最前面に来るようにする */
     align-items: center;
 }
 
@@ -771,18 +936,11 @@ a.important-news:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    /* 半透明の黒背景 */
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--menu-bg);
     z-index: 999;
-    /* ボタンよりも少し下に */
     opacity: 0;
-    /* 最初は透明 */
-}
-
-.menu {
-    background: #000000a9;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 0 1em;
@@ -819,19 +977,9 @@ a.important-news:hover {
     text-align: center;
 }
 
-/* メディアクエリを使って、小さい画面のときに表示 */
 @media (max-width: 600px) {
     .hamburger {
         display: flex;
-        /* 小さい画面では表示 */
-    }
-
-    .menu {
-        top: 0;
-        left: 0;
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
     }
 
     header>div>nav {
@@ -892,5 +1040,32 @@ a.important-news:hover {
 }
 
 .swiper-pagination-bullet-active {
-    background: #D6C000 !important;
+    background: var(--dot-active) !important;
+}
+
+/* トグルボタン */
+
+.toggle-container {
+    display: flex;
+    gap: 1em;
+    background: var(--fsnsl-bg-color);
+    padding: 0.5rem;
+    border-radius: 0.5em;
+    width: fit-content;
+}
+
+.toggle-container>div {
+    border-radius: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.light-theme .toggle-container>div>img {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: light) {
+    .system-theme .toggle-container>div>img {
+        filter: invert(1);
+    }
 }

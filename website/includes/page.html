@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="system-theme">
 
 <head>
     <meta charset="UTF-8">
@@ -102,36 +102,51 @@
     </main>
     <footer>
         <div id="footer-site-links">
-            <span class="text-1rem font-500">高専カンファレンス in 首都</span>
-            <ul>
-                <li>
-                    <a href="/about">開催概要</a>
-                </li>
-                <li>
-                    <a href="/privacy-policy">プライバシーポリシー</a>
-                </li>
-                <li>
-                    <a href="/contact">お問い合わせ</a>
-                </li>
-            </ul>
+            <div>
+                <span class="text-1rem font-500">高専カンファレンス in 首都</span>
+                <ul>
+                    <li>
+                        <a href="/about">開催概要</a>
+                    </li>
+                    <li>
+                        <a href="/privacy-policy">プライバシーポリシー</a>
+                    </li>
+                    <li>
+                        <a href="/contact">お問い合わせ</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="theme-toggle-par">
+                <div class="toggle-container">
+                    <div onclick="changetheme('light')">
+                        <img src="/icons/light_mode_24dp_FILL0_wght200_GRAD0_opsz24.svg" class="text-1rem font-500" />
+                    </div>
+                    <div onclick="changetheme('dark')">
+                        <img src="/icons/dark_mode_24dp_FILL0_wght200_GRAD0_opsz24.svg" class="text-1rem font-500" />
+                    </div>
+                    <div onclick="changetheme('system')">
+                        <img src="/icons/devices_24dp_FILL0_wght200_GRAD0_opsz24.svg" class="text-1rem font-500" />
+                    </div>
+                </div>
+            </div>
+            <script src="/scripts/themetoggle.js"></script>
         </div>
         <div id="footer-sns-links">
             <div id="footer-sns-buttons">
                 <a class="footer-sns-button" href="https://twitter.com/kosenconfsyuto" target="_blank">
-                    <img src="/public/icons/x-logo.png" alt="Twitter" loading="lazy">
+                    <img src="/public/icons/x-logo.png" alt="Twitter" loading="lazy" class="d-invert" />
                 </a>
                 <a class="footer-sns-button" href="https://www.instagram.com/kosenconfsyuto/" target="_blank">
-                    <img src="/public/icons/insta-logo.png" alt="Instagram" loading="lazy">
+                    <img src="/public/icons/insta-logo.png" alt="Instagram" loading="lazy" />
                 </a>
                 <a class="footer-sns-button" href="https://kosenconf.jp/?168syuto" target="_blank">
-                    <img src="/public/icons/kosenconf-logo.png" alt="高専カンファレンスWiki" loading="lazy">
+                    <img src="/public/icons/kosenconf-logo.png" alt="高専カンファレンスWiki" loading="lazy" />
                 </a>
             </div>
             <div id="footer-share-button">
                 <a href="https://twitter.com/share?url=https://kosenconfsyuto.com{{url}}&text=『{{title}}: {{description}}』&hashtags=kosenconf168syuto"
                     class="twitter-share-button" data-show-count="false">
-                    <img src="/public/icons/share_24dp_FILL0_wght200_GRAD0_opsz24.svg" alt="share"
-                        style="filter: brightness(0);" loading="lazy">
+                    <img src="/public/icons/share_24dp_FILL0_wght200_GRAD0_opsz24.svg" alt="share" loading="lazy" />
                     <span class="text-1rem font-500">共有</span>
                 </a>
             </div>
