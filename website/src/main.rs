@@ -420,12 +420,12 @@ async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
     let client = Client::new();
     let payload = json!({
         "embeds": [{
-            "title": "New Contact Form Submission",
-            "color": 16777215, // White color
+            "title": "新しいお問い合わせが来ました",
+            "color": 1136076, // White color
             "fields": [
-                { "name": "Name", "value": form.name, "inline": true },
-                { "name": "Email", "value": form.email, "inline": true },
-                { "name": "Message", "value": form.message }
+                { "name": "お名前", "value": form.name },
+                { "name": "メールアドレス", "value": form.email },
+                { "name": "メッセージ", "value": form.message }
             ]
         }]
     });
