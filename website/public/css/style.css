@@ -544,7 +544,7 @@ footer {
     width: calc(100% - 4em);
     text-align: center;
     padding: 1em 2em;
-    color: var(--theme);
+    color: #0D71D6;
     background: var(--text);
     border-radius: 1em;
     text-decoration: none;
@@ -672,7 +672,7 @@ a.important-news:hover {
 }
 
 #news-page .news .topics-tip {
-    color: var(--text-reverse);
+    color: var(--text);
 }
 
 #news-page .important-news .topics-tip {
@@ -757,6 +757,7 @@ a.important-news:hover {
     max-width: calc(100% - 2.125em);
     min-width: calc(100% - 2.125em);
     background: var(--bg-color);
+    color: var(--text-reverse);
 }
 
 #contact>form {
