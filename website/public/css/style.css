@@ -883,8 +883,8 @@ a.important-news:hover {
 }
 
 .swiper-slide>a {
-    width: fit-content;
-    height: fit-content;
+    width: inherit;
+    height: inherit;
     background: transparent;
 }
 
