@@ -409,6 +409,7 @@ footer {
 #footer-share-button {
     display: flex;
     gap: 1em;
+    align-items: center;
 }
 
 #footer-share-button>a {
