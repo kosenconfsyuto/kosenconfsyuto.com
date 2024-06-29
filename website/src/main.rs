@@ -69,6 +69,10 @@ fn is_kiriban(access_count: usize) -> bool {
         return true;
     }
 
+    if access_count % 334 == 0 {
+        return true;
+    }
+
     // ゾロ目の判定
     let access_str = access_count.to_string();
     let first_char = access_str.chars().next().unwrap();
