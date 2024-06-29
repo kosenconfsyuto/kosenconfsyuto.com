@@ -53,9 +53,19 @@ fn load_kiriban_content() -> Result<String, std::io::Error> {
     Ok(content)
 }
 
+fn is_kiriban_zero(access_count: u64) -> bool {
+    let count_str = access_count.to_string();
+    let first_char = count_str.chars().next().unwrap();
+
+    if first_char != '0' && count_str[1..].chars().all(|c| c == '0') {
+        return true;
+    }
+    false
+}
+
 fn is_kiriban(access_count: usize) -> bool {
     // キリ番の判定
-    if access_count % 100 == 0 {
+    if is_kiriban_zero(access_count as u64) {
         return true;
     }
 
