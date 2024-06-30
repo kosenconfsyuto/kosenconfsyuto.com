@@ -1,0 +1,65 @@
+#onair {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.80) 0%, rgba(56, 56, 56, 0.80) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: flex-end;
+}
+
+#onair-child {
+    background-image: url(/images/onair-bg.png);
+    background-size: 24rem 8rem;
+    background-position: calc(100% - 1rem) center;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+@media (width > 80rem) {
+    #onair-child {
+        background-position: calc(50% - 12rem + 40rem) center;
+    }
+}
+
+#onair-context {
+    background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.00) 100%);
+    width: 100%;
+    height: 100%;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#onair-context>div {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+#onair-text {
+    color: #ff0000;
+    font-weight: 600;
+    gap: 0.5rem;
+}
+
+#onair-button {
+    background: #ffffff;
+    color: #000000;
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    width: calc(100% - 2em);
+}
+
+#onair-button:hover {
+    background: #f0f0f0;
+}
+
+#onair-context-grandchild {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

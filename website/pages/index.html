@@ -6,6 +6,7 @@ image: /images/site-ogp.png
 common_parts: page
 ---
 <link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/onair.css">
 <style>
     /* Custom styles for the slider */
     .swiper-container {
@@ -55,6 +56,23 @@ common_parts: page
                 </div>
             </div>
         </section>
+        <section id="onair">
+            <div id="onair-child">
+                <div id="onair-context">
+                    <div class="flex space-between">
+                        <div id="onair-context-grandchild">
+                            <div id="onair-text" class="flex">
+                                <img src="/icons/onair-icon.svg" alt="オンエアアイコン">
+                                <p>NOW ON AIR</p>
+                            </div>
+                            <p>24sカンファレンス代表×首都カンファレンス代表</p>
+                            <h2>雑談スペース</h2>
+                            <a id="onair-button" href="https://twitter.com/i/spaces/1rmxPMymrLMKN" class="text-1rem w-full">聞いてみる</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="important-news" class="default-width">
             <div>
                 {{newslist}}
@@ -65,10 +83,13 @@ common_parts: page
                 <!-- Swiper -->
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><a href="/news/release"><img src="/images/poster.png" class="w-full"></a></div>
+                        <div class="swiper-slide"><a href="/news/release"><img src="/images/poster.png"
+                                    class="w-full"></a></div>
                         <div class="swiper-slide"><img src="/images/member.png" class="w-full"></div>
-                        <div class="swiper-slide"><a href="/news/narisumashi_twitter"><img src="/images/narisumashi.png" class="w-full"></a></div>
-                        <div class="swiper-slide"><a href="/news/make_homepage"><img src="/images/tech-release-thumbnail.png" class="w-full"></a></div>
+                        <div class="swiper-slide"><a href="/news/narisumashi_twitter"><img src="/images/narisumashi.png"
+                                    class="w-full"></a></div>
+                        <div class="swiper-slide"><a href="/news/make_homepage"><img
+                                    src="/images/tech-release-thumbnail.png" class="w-full"></a></div>
                         <div class="swiper-slide"><img src="/images/member.png" class="w-full"></div>
                     </div>
                     <div class="controls default-width"
@@ -88,10 +109,13 @@ common_parts: page
                         </div>
                         <!-- Add Navigation -->
                         <div style="display: flex; gap: 1em; justify-content: flex-end;">
-                            <div class="swiper-button-prev control" style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
-                                <img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" style="transform: rotate(180deg);" loading="lazy">
+                            <div class="swiper-button-prev control"
+                                style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
+                                <img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg"
+                                    style="transform: rotate(180deg);" loading="lazy">
                             </div>
-                            <div class="swiper-button-next control" style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
+                            <div class="swiper-button-next control"
+                                style="position: relative; top: 0; width: fit-content; height: fit-content; margin-top: 0;">
                                 <img src="/icons/chevron_right_24dp_FILL0_wght200_GRAD0_opsz24.svg" loading="lazy">
                             </div>
                             <style>
