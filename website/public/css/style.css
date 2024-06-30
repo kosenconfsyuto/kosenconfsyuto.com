@@ -790,11 +790,11 @@ a.important-news:hover {
     gap: 1em;
 }
 
-#news-page>ul>li>a.news {
+#news-page>div>a.news {
     background: var(--news-page-news-bg);
 }
 
-#news-page>ul>li>a.important-news {
+#news-page>div>a.important-news {
     background: var(--alert-color);
 }
 
