@@ -139,8 +139,8 @@ html.dark-theme {
     --fsnsb-bg-color: #2b2b2b;
     --fsnsb-border-color: #323232;
     --w-btn-hover: #b1b1b1;
-    --news-bg: rgba(255, 255, 255, 0.2);
-    --news-bg-hover: rgba(255, 255, 255, 0.4);
+    --news-bg: rgba(0, 0, 0, 0.3);
+    --news-bg-hover: rgba(0, 0, 0, 0.5);
     --important-news-bg: rgba(185, 0, 0, 0.2);
     --important-news-bg-hover: rgba(185, 0, 0, 0.4);
     --form-border: #323232;
@@ -198,8 +198,8 @@ html.dark-theme {
         --fsnsb-bg-color: #2b2b2b;
         --fsnsb-border-color: #323232;
         --w-btn-hover: #b1b1b1;
-        --news-bg: rgba(255, 255, 255, 0.2);
-        --news-bg-hover: rgba(255, 255, 255, 0.4);
+        --news-bg: rgba(0, 0, 0, 0.3);
+        --news-bg-hover: rgba(0, 0, 0, 0.5);
         --important-news-bg: rgba(185, 0, 0, 0.2);
         --important-news-bg-hover: rgba(185, 0, 0, 0.4);
         --form-border: #323232;
