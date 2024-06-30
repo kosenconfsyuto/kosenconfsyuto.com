@@ -583,7 +583,7 @@ footer {
     }
 }
 
-#important-news>ul {
+#important-news>div {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -709,7 +709,7 @@ a.important-news:hover {
     margin: 0 auto;
 }
 
-#news>ul {
+#news>div {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -783,7 +783,7 @@ a.important-news:hover {
     margin: 0 auto;
 }
 
-#news-page>ul {
+#news-page>div {
     list-style: none;
     display: flex;
     flex-direction: column;
