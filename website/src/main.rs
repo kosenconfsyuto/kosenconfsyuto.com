@@ -129,7 +129,6 @@ async fn render_page(path: &str, url: &str, access_count: usize, news_list: &str
         }
     }
 
-    // キリ番の処理
     let kiriban_content = if is_kiriban(access_count) {
         load_kiriban_content().unwrap_or_default()
     } else {
@@ -199,7 +198,6 @@ async fn render_markdown(path: &str, url: &str, access_count: usize) -> Result<S
         }
     }
 
-    // キリ番の処理
     let kiriban_content = if is_kiriban(access_count) {
         load_kiriban_content().unwrap_or_default()
     } else {
@@ -229,7 +227,6 @@ async fn generate_news_list() -> Result<String> {
         })
         .collect();
 
-    // Sort news files by date in descending order
     news_files.sort_by_key(|path| {
         let content = std::fs::read_to_string(path).ok()?;
         let parts: Vec<&str> = content.splitn(3, "---").collect();
@@ -297,7 +294,6 @@ async fn generate_all_news_list() -> Result<String> {
         })
         .collect();
 
-    // Sort news files by date in descending order
     news_files.sort_by_key(|path| {
         let content = std::fs::read_to_string(path).ok()?;
         let parts: Vec<&str> = content.splitn(3, "---").collect();
@@ -310,7 +306,6 @@ async fn generate_all_news_list() -> Result<String> {
     });
     news_files.reverse();
 
-    // Select the latest all news
     let latest_news_files = news_files.into_iter();
 
     let tera = Tera::new("includes/**/*").unwrap();
@@ -375,25 +370,20 @@ async fn handle_request(req: HttpRequest, counter: web::Data<Arc<AtomicUsize>>) 
 
     let user_agent = req.headers().get("User-Agent").and_then(|h| h.to_str().ok()).unwrap_or("Unknown");
 
-    // Generate news list
     let news_list = generate_news_list().await?;
 
     let all_news_list = generate_all_news_list().await?;
 
-    // Check if the file exists in the public directory
     let public_path = if path.is_empty() { "public/index.html".to_string() } else { format!("public/{}", path) };
     if Path::new(&public_path).exists() {
         return Ok(fs::NamedFile::open(public_path)?.into_response(&req));
     }
 
-    // Check if the request is for the main page or a resource
     let is_resource_request = path.ends_with(".css") || path.ends_with(".js") || path.ends_with(".png") || path.ends_with(".jpg") || path.ends_with(".jpeg") || path.ends_with(".gif") || path.ends_with(".svg");
 
-    // Increment the access counter only for the main page requests
     let access_count = if !is_resource_request {
         let count = counter.fetch_add(1, Ordering::SeqCst) + 1;
 
-        // Save the updated access count to a file
         let mut file = BufWriter::new(File::create("access_count.txt").map_err(|_| actix_web::error::ErrorInternalServerError("Failed to open access_count.txt"))?);
         writeln!(file, "{}", count).map_err(|_| actix_web::error::ErrorInternalServerError("Failed to write to access_count.txt"))?;
 
@@ -463,7 +453,6 @@ async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
 async fn generate_sitemap() -> Result<impl Responder> {
     let base_url = "https://kosenconfsyuto.com";
 
-    // Collect static pages from the pages directory
     let static_pages = std::fs::read_dir("pages")
         .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read pages directory"))?
         .filter_map(|entry| entry.ok())
@@ -477,7 +466,6 @@ async fn generate_sitemap() -> Result<impl Responder> {
         })
         .collect::<Vec<_>>();
 
-    // Collect dynamic news pages from the news directory
     let news_files = std::fs::read_dir("news")
         .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to read news directory"))?
         .filter_map(|entry| entry.ok())

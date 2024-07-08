@@ -773,7 +773,7 @@ a.important-news:hover {
     gap: 0.5em;
 }
 
-#contact>form>input[type="submit"] {
+#contact>form>button[type="submit"] {
     padding: 1em 2em;
     background: var(--theme);
     color: var(--n-text);

@@ -6,7 +6,7 @@ image: /images/site-ogp.png
 common_parts: page | cn
 ---
 <div id="contact">
-    <form action="/submit_contact" method="post">
+    <form action="/submit_contact" method="post" id="contact_form">
         <div>
             <label for="name">お名前</label>
             <input type="text" id="name" name="name" required>
@@ -21,8 +21,28 @@ common_parts: page | cn
         </div>
         <div>
             <p>すべての項目を入力してください。<br>
-            また、お問い合わせ内容は、最大で1000文字まで、その他の項目は50文字までとなっております。ご注意ください。</p>
+                また、お問い合わせ内容は、最大で1000文字まで、その他の項目は50文字までとなっております。ご注意ください。</p>
         </div>
-        <input type="submit" value="送信">
+        <button class="g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'
+            type="submit" value="">送信</button>
     </form>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdrnwoqAAAAAEGPKdhjqDbyWC37HGEfzrwJy8R5"></script>
+    <script>
+        document.getElementById('contact_form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LdrnwoqAAAAAEGPKdhjqDbyWC37HGEfzrwJy8R5', { action: 'submit' }).then(function (token) {
+                    // トークンをフォームに追加
+                    var recaptchaResponse = document.createElement('input');
+                    recaptchaResponse.setAttribute('type', 'hidden');
+                    recaptchaResponse.setAttribute('name', 'recaptcha_response');
+                    recaptchaResponse.setAttribute('value', token);
+                    document.getElementById('your-form').appendChild(recaptchaResponse);
+
+                    // フォームを送信
+                    document.getElementById('your-form').submit();
+                });
+            });
+        });
+    </script>
 </div>
