@@ -28,21 +28,11 @@ common_parts: page | cn
     </form>
     <script src="https://www.google.com/recaptcha/api.js?render=6LdrnwoqAAAAAEGPKdhjqDbyWC37HGEfzrwJy8R5"></script>
     <script>
-        document.getElementById('contact_form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LdrnwoqAAAAAEGPKdhjqDbyWC37HGEfzrwJy8R5', { action: 'submit' }).then(function (token) {
-                    // トークンをフォームに追加
-                    var recaptchaResponse = document.createElement('input');
-                    recaptchaResponse.setAttribute('type', 'hidden');
-                    recaptchaResponse.setAttribute('name', 'recaptcha_response');
-                    recaptchaResponse.setAttribute('value', token);
-                    document.getElementById('your-form').appendChild(recaptchaResponse);
-
-                    // フォームを送信
-                    document.getElementById('your-form').submit();
-                });
-            });
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdrnwoqAAAAAEGPKdhjqDbyWC37HGEfzrwJy8R5', {action: 'submit'}).then(function(token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
         });
+    });
     </script>
 </div>
