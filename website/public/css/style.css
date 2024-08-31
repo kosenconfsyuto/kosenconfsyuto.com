@@ -1076,3 +1076,7 @@ a.important-news:hover {
         filter: invert(1);
     }
 }
+
+ul {
+    padding-inline-start: 20px;
+}
