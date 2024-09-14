@@ -5,7 +5,7 @@ topics: お知らせ
 tags: 開催
 image: /images/poster.png
 displayslider: true
-date: 2024.08.25
+date: 2024.09.14
 common_parts: page | article
 ---
 高専カンファレンス in 沖縄にて、高専カンファレンス in 首都について紹介していただきました。
