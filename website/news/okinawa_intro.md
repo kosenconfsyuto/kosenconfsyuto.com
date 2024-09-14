@@ -3,7 +3,7 @@ title: 高専カンファ in 沖縄で紹介していただきました
 description: 宣伝のお時間をいただき、当カンファが紹介されました
 topics: お知らせ
 tags: 開催
-image: /images/poster.png
+image: /images/okinawa-1.jpg
 displayslider: true
 date: 2024.09.14
 common_parts: page | article
