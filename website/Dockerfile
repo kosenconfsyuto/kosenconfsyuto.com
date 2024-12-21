@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /v
 WORKDIR /app
 
 # Rustのバイナリをコピー
-COPY --from=0 /app/target/release/your_project_binary /app/
+COPY --from=0 /app/target/release/website /app/
 
 # 実行コマンド
 CMD ["./your_project_binary"]

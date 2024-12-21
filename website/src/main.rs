@@ -27,7 +27,6 @@ struct FrontMatter {
     tags: Option<String>,
     image: Option<String>,
     common_parts: Option<String>,
-    displayslider: Option<bool>,
     date: Option<String>,
 }
 
