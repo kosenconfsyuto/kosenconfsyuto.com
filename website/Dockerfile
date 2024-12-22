@@ -1,5 +1,5 @@
 # ベースイメージ
-FROM rust:latest
+FROM rust:latest as builder
 
 # 作業ディレクトリ
 WORKDIR /website
@@ -22,11 +22,11 @@ RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /v
 # 作業ディレクトリ
 WORKDIR /website
 
-# Rustのバイナリをコピー
-COPY --from=0 /website/target/release/website /website/
+# Rustのバイナリをコピー (ここを修正)
+COPY --from=builder /website/target/release/website /website/
 
 # 実行権限を付与
-RUN chmod +x /website/website
+RUN chmod +x ./website
 
 # 実行コマンド
-CMD ["/website/website"]
+CMD ["./website"]  # ここも修正。websiteだけで良い
