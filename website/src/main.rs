@@ -549,7 +549,7 @@ async fn main() -> std::io::Result<()> {
                     .route(web::get().to(handle_request))
             )
     })
-    .bind("127.0.0.1:8000")?
+    .bind("127.0.0.1:3010")?
     .run()
     .await
 }
