@@ -26,4 +26,4 @@ WORKDIR /app
 COPY --from=0 /app/target/release/website /app/
 
 # 実行コマンド
-CMD ["website"]
+CMD ["/app/website"]
