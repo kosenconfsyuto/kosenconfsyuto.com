@@ -19,6 +19,9 @@ FROM debian:bullseye-slim
 # 必要なパッケージをインストール
 RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
 
+# ライブラリキャッシュを更新 (追加)
+RUN ldconfig
+
 # 作業ディレクトリ
 WORKDIR /website
 
