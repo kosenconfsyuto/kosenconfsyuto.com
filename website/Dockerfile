@@ -2,7 +2,7 @@
 FROM rust:latest
 
 # 作業ディレクトリ
-WORKDIR /app
+WORKDIR /website
 
 # 必要なファイルをコピー
 COPY . .
@@ -20,10 +20,13 @@ FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリ
-WORKDIR /app
+WORKDIR /website
 
 # Rustのバイナリをコピー
-COPY --from=0 /app/target/release/website /app/
+COPY --from=0 /website/target/release/website /website/
+
+# 実行権限を付与
+RUN chmod +x /website/website
 
 # 実行コマンド
-CMD ["/app/website"]
+CMD ["/website/website"]
