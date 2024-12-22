@@ -32,4 +32,4 @@ COPY --from=builder /website/target/release/website /website/
 RUN chmod +x ./website
 
 # 実行コマンド
-CMD ["./website"]  # ここも修正。websiteだけで良い
+CMD ["website"]  # ここも修正。websiteだけで良い
