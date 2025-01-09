@@ -35,6 +35,7 @@ struct ContactForm {
     name: String,
     email: String,
     message: String,
+    recaptcha_response: String
 }
 
 // 404ページのレンダリング
@@ -412,11 +413,35 @@ async fn handle_request(req: HttpRequest, counter: web::Data<Arc<AtomicUsize>>) 
     }
 }
 
-async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
+async fn handle_contact_form(form: web::Form<ContactForm>) -> Result<HttpResponse, actix_web::Error> {
     println!("Received contact form: {:?}", form);
     println!("Name: {}", form.name);
     println!("Email: {}", form.email);
     println!("Message: {}", form.message);
+    println!("Recaptcha response: {}", form.recaptcha_response);
+
+    let recaptcha_secret = env::var("RECAPTCHA_SECRET").expect("RECAPTCHA_SECRET must be set in .env");
+    let recaptcha_verify_url = "https://www.google.com/recaptcha/api/siteverify";
+
+    let client = Client::new();
+    let params = [
+        ("secret", recaptcha_secret.as_str()),
+        ("response", form.recaptcha_response.as_str()),
+    ];
+
+    let recaptcha_response = client.post(recaptcha_verify_url)
+        .form(&params)
+        .send()
+        .await
+        .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to verify reCAPTCHA"))?;
+
+    let recaptcha_body: serde_json::Value = recaptcha_response.json()
+        .await
+        .map_err(|_| actix_web::error::ErrorInternalServerError("Failed to parse reCAPTCHA response"))?;
+
+    if !recaptcha_body["success"].as_bool().unwrap_or(false) {
+        return Ok(HttpResponse::BadRequest().content_type(ContentType::html()).body("reCAPTCHA verification failed"));
+    }
 
     let webhook_url = env::var("WEBHOOK_URL").expect("WEBHOOK_URL must be set in .env");
 
@@ -436,15 +461,15 @@ async fn handle_contact_form(form: web::Form<ContactForm>) -> impl Responder {
     match client.post(&webhook_url).json(&payload).send().await {
         Ok(response) => {
             if response.status().is_success() {
-                HttpResponse::Ok().content_type(ContentType::html()).body("Thank you for your message!")
+                Ok(HttpResponse::Ok().content_type(ContentType::html()).body("Thank you for your message!"))
             } else {
                 eprintln!("Failed to send message to Discord: {:?}", response.text().await);
-                HttpResponse::InternalServerError().content_type(ContentType::html()).body("Failed to send message.")
+                Ok(HttpResponse::InternalServerError().content_type(ContentType::html()).body("Failed to send message."))
             }
         }
         Err(e) => {
             eprintln!("Failed to send message to Discord: {:?}", e);
-            HttpResponse::InternalServerError().content_type(ContentType::html()).body("Failed to send message.")
+            Ok(HttpResponse::InternalServerError().content_type(ContentType::html()).body("Failed to send message."))
         }
     }
 }
