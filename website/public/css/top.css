@@ -10,6 +10,18 @@ body {
     background: -moz-linear-gradient(#145980, #001023) no-repeat;
 }
 
+.map {
+    border: 0;
+    width: 100%;
+    height: calc(100vw / 16 * 9);
+}
+
+@media (max-width: 428px) {
+    .map {
+        height: 20rem;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     .system-theme body {
         background: linear-gradient(#145980, #001023) no-repeat;
